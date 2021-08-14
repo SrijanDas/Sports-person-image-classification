@@ -1,5 +1,12 @@
 Dropzone.autoDiscover = false;
-const sportsPersons = ["Ronaldo", "Conor", "Kohli", "Messi", "Khabib", "Kane"];
+const sportsPersons = [
+  "cristiano_ronaldo",
+  "conor_mcgregor",
+  "virat_kohli",
+  "lionel_messi",
+  "khabib",
+  "kane_williamson",
+];
 
 $(document).ready(function () {
   $("#error").hide();
@@ -21,10 +28,10 @@ function loadCards() {
             class="card-img img-fluid"
             alt="..."
           />
-          <h5 class="card-title">${person}</h5>
+          <h5 class="card-title">${person.replace("_", " ")}</h5>
         </div>
       </div>
-      <p id="${person}-percentage" class="card__percentage text-center"></p>
+      <p id="card_score_${person}" class="card__percentage text-center mt-2"></p>
     </div>
     `);
   });
@@ -37,12 +44,14 @@ function init() {
     addRemoveLinks: true,
     dictDefaultMessage: "Some Message",
     autoProcessQueue: false,
+    acceptedFiles: "image/*",
   });
 
   dz.on("addedfile", function () {
     if (dz.files[1] != null) {
       dz.removeFile(dz.files[0]);
     }
+    $("#submitBtn").removeAttr("disabled");
   });
 
   dz.on("complete", function (file) {
@@ -70,13 +79,11 @@ function init() {
         // khabib: 3
         // lionel_messi: 4
         // virat_kohli: 5
-
         let players = [
-          "conor_mcgregor",
-          "cristiano_ronaldo",
-          "kane_williamson",
-          "khabib",
           "lionel_messi",
+          "maria_sharapova",
+          "roger_federer",
+          "serena_williams",
           "virat_kohli",
         ];
 
@@ -99,15 +106,25 @@ function init() {
             let index = classDictionary[personName];
             let proabilityScore = match.class_probability[index];
             let elementName = "#score_" + personName;
+            let cardScore = "#card_score_" + personName;
             $(elementName).html(proabilityScore);
+            $(cardScore).html(proabilityScore + "%");
           }
         }
         dz.removeFile(file);
+
+        $("#submitBtn").html("Classify");
       }
     );
   });
 
   $("#submitBtn").on("click", function (e) {
+    $(this).attr("disabled", true);
+    $(this).html(`
+    <div class="spinner-border spinner-border-sm text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    `);
     dz.processQueue();
   });
 }
