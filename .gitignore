@@ -1,3 +1,12 @@
 .idea
 .ipynb_checkpoints
+
 cnn_model
+
+venv
+
+test.py
+
+.vscode
+
+__pycache__
