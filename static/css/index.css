@@ -55,6 +55,17 @@
   background-color: #4caf50;
   color: white;
 }
+
+.translate-middle {
+  transform: translate(-120%, 20%) !important;
+}
+
+#result-name {
+  text-transform: capitalize;
+}
+#result-img {
+  border-radius: 50%;
+}
 @media (max-width: 768px) {
   .card {
     height: 4.5rem;

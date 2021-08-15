@@ -18,11 +18,12 @@ $(document).ready(function () {
 
 function loadCards() {
   const cardsContainer = $("#cards-container");
+  cardsContainer.html("");
   sportsPersons.forEach((person) => {
     cardsContainer.append(`
     <div class="col">
-      <div id=${person} class="card shadow" style="max-width: 500px">
-        <div class="card-body">
+      <div id=${person} class="card shadow" style="max-width: 500px">  
+      <div class="card-body">
           <img
             src="/static/img/${person}.jpg"
             class="card-img img-fluid"
@@ -71,6 +72,7 @@ function init() {
           $("#divClassTable").hide();
           $("#submitBtn").html("Classify");
           $("#error").show();
+          loadCards();
           dz.removeFile(file);
           return;
         }
@@ -96,7 +98,17 @@ function init() {
           $("#error").hide();
           $("#resultHolder").show();
           $("#divClassTable").show();
-          $("#resultHolder").html(`<h5>${personDetected}</h5>`);
+
+          // setting result name and image
+          $("#resultHolder").html(`
+          <img id="result-img" class="img-thumbnail" src=${imageData} alt="."/>
+          <h5 id="result-name" class="mt-2 fs-2 text-center">${personDetected.replace(
+            "_",
+            " "
+          )}</h5>
+          `);
+
+          // setting probability
           let classDictionary = match.class_dictionary;
 
           for (let personName in classDictionary) {
@@ -120,6 +132,7 @@ function init() {
   });
 
   $("#submitBtn").on("click", function (e) {
+    $("#match-tick").remove();
     $(this).attr("disabled", true);
     $(this).html(`
     <div class="spinner-border spinner-border-sm text-light" role="status">
@@ -132,17 +145,39 @@ function init() {
 
 // loads card background color
 function loadCardBg(personDetected, personName, proabilityScore) {
+  const bgWidth = Math.ceil(proabilityScore);
+
+  // setting matched card styles
   if (personDetected === personName) {
-    $("#" + personName).css(
-      "background",
-      `linear-gradient(90deg, #20c997 ${Math.ceil(
-        proabilityScore
-      )}%, white 50%)`
-    );
+    const matchedCard = document.getElementById(personName);
+    matchedCard.style.background = `linear-gradient(90deg, #20c997 ${bgWidth}%, white 0%)`;
+    matchedCard.style.border = "2px solid #20c997";
+    let tickSpan = document.createElement("span");
+    tickSpan.innerHTML = `  
+    <span id="match-tick" class="position-absolute top-0 start-100 translate-middle rounded-circle">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-check-circle text-success" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+      <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+    </svg>
+    <span class="visually-hidden">unread messages</span>
+  </span>
+    `;
+    $("#card_score_" + personName).css({
+      color: "#20c997",
+      fontWeight: "600",
+      fontSize: "larger",
+    });
+
+    matchedCard.append(tickSpan);
   } else {
-    $("#" + personName).css(
-      "background",
-      `linear-gradient(90deg, #9EEAF9 ${Math.ceil(proabilityScore)}%, white $)`
-    );
+    $("#" + personName).css({
+      background: `linear-gradient(90deg, #9EEAF9 ${bgWidth}%, white 0%)`,
+      border: "none",
+    });
+    $("#card_score_" + personName).css({
+      color: "black",
+      fontWeight: "",
+      fontSize: "",
+    });
   }
 }
