@@ -25,7 +25,7 @@ function loadCards() {
       <div id=${person} class="card shadow" style="max-width: 500px">  
       <div class="card-body">
           <img
-            src="/static/img/${person}.jpg"
+            src="./assets/img/${person}.jpg"
             class="card-img img-fluid"
             alt="..."
           />
@@ -66,7 +66,7 @@ function init() {
         image_data: imageData,
       },
       function (data, status) {
-        console.log(data);
+        // console.log(data);
         if (!data || data.length == 0) {
           $("#resultHolder").hide();
           $("#divClassTable").hide();
@@ -101,7 +101,7 @@ function init() {
 
           // setting result name and image
           $("#resultHolder").html(`
-          <img id="result-img" class="img-thumbnail" src=${imageData} alt="."/>
+          <img id="result-img" class="mx-auto d-block" src=${imageData} alt="."/>
           <h5 id="result-name" class="mt-2 fs-2 text-center">${personDetected.replace(
             "_",
             " "
@@ -150,8 +150,7 @@ function loadCardBg(personDetected, personName, proabilityScore) {
   // setting matched card styles
   if (personDetected === personName) {
     const matchedCard = document.getElementById(personName);
-    matchedCard.style.background = `linear-gradient(90deg, #20c997 ${bgWidth}%, white 0%)`;
-    matchedCard.style.border = "2px solid #20c997";
+    // setting tick for matched card
     let tickSpan = document.createElement("span");
     tickSpan.innerHTML = `  
     <span id="match-tick" class="position-absolute top-0 start-100 translate-middle rounded-circle">
@@ -162,13 +161,19 @@ function loadCardBg(personDetected, personName, proabilityScore) {
     <span class="visually-hidden">unread messages</span>
   </span>
     `;
+    matchedCard.append(tickSpan);
+
+    // prob score of matched card
     $("#card_score_" + personName).css({
       color: "#20c997",
       fontWeight: "600",
       fontSize: "larger",
     });
 
-    matchedCard.append(tickSpan);
+    $(`#${personName}`).css({
+      background: `linear-gradient(90deg, #20c997 ${bgWidth}%, white 0%)`,
+      border: "2px solid #20c997",
+    });
   } else {
     $("#" + personName).css({
       background: `linear-gradient(90deg, #9EEAF9 ${bgWidth}%, white 0%)`,
