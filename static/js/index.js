@@ -69,7 +69,9 @@ function init() {
         if (!data || data.length == 0) {
           $("#resultHolder").hide();
           $("#divClassTable").hide();
+          $("#submitBtn").html("Classify");
           $("#error").show();
+          dz.removeFile(file);
           return;
         }
         // class_dictionary:
@@ -79,13 +81,6 @@ function init() {
         // khabib: 3
         // lionel_messi: 4
         // virat_kohli: 5
-        let players = [
-          "lionel_messi",
-          "maria_sharapova",
-          "roger_federer",
-          "serena_williams",
-          "virat_kohli",
-        ];
 
         let match = null;
         let bestScore = -1;
@@ -97,16 +92,22 @@ function init() {
           }
         }
         if (match) {
+          let personDetected = match.class;
           $("#error").hide();
           $("#resultHolder").show();
           $("#divClassTable").show();
-          $("#resultHolder").html($(`[data-player="${match.class}"`).html());
+          $("#resultHolder").html(`<h5>${personDetected}</h5>`);
           let classDictionary = match.class_dictionary;
+
           for (let personName in classDictionary) {
             let index = classDictionary[personName];
             let proabilityScore = match.class_probability[index];
             let elementName = "#score_" + personName;
             let cardScore = "#card_score_" + personName;
+
+            // setting card bg
+            loadCardBg(personDetected, personName, proabilityScore);
+
             $(elementName).html(proabilityScore);
             $(cardScore).html(proabilityScore + "%");
           }
@@ -127,4 +128,21 @@ function init() {
     `);
     dz.processQueue();
   });
+}
+
+// loads card background color
+function loadCardBg(personDetected, personName, proabilityScore) {
+  if (personDetected === personName) {
+    $("#" + personName).css(
+      "background",
+      `linear-gradient(90deg, #20c997 ${Math.ceil(
+        proabilityScore
+      )}%, white 50%)`
+    );
+  } else {
+    $("#" + personName).css(
+      "background",
+      `linear-gradient(90deg, #9EEAF9 ${Math.ceil(proabilityScore)}%, white $)`
+    );
+  }
 }
