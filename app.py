@@ -1,12 +1,12 @@
-from flask import Flask, request, jsonify
-import util
+from flask import Flask, request, jsonify, render_template
+from server import util
 
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return "API is running..."
+    return render_template('index.html')
 
 
 @app.route('/classify_image', methods=['GET', 'POST'])
@@ -23,4 +23,4 @@ def classify_image():
 if __name__ == "__main__":
     print("Starting Python Flask Server For Sports Celebrity Image Classification")
     util.load_saved_artifacts()
-    app.run(debug=False)
+    app.run(port=5000, debug=True)

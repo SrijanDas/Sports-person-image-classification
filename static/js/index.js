@@ -25,7 +25,7 @@ function loadCards() {
       <div id=${person} class="card shadow" style="max-width: 500px">  
       <div class="card-body">
           <img
-            src="./assets/img/${person}.jpg"
+            src="/static/img/${person}.jpg"
             class="card-img img-fluid"
             alt="..."
           />
@@ -58,11 +58,12 @@ function init() {
   dz.on("complete", function (file) {
     let imageData = file.dataURL;
 
-    var url = "http://localhost:5000/classify_image";
+    var url = "http://127.0.0.1:5000/classify_image";
 
     $.post(
       url,
       {
+        headers: { "Access-Control-Allow-Origin": "*" },
         image_data: imageData,
       },
       function (data, status) {
