@@ -1,7 +1,12 @@
 
 # Sports Person Image Classification
 This projects can classify images of the following sports persons:
-1.
+1. Cristiano Ronaldo
+2. Lionel Messi
+3. Conor McGregor
+4. Khabib
+5. Virat Kohli
+6. Kane Williamson
 
 
 ## Demo
@@ -41,7 +46,7 @@ Install dependencies
   pip install -r requirements.txt
 ```
 
-Start the server
+Start the backend server
 
 ```bash
   python app.py
