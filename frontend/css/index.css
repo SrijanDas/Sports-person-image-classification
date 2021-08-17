@@ -87,6 +87,9 @@
   .card-body {
     gap: 0.5rem;
   }
+  #dropzoneInput {
+    margin-bottom: 1rem;
+  }
 }
 @media (max-width: 544px) {
   .card-body {
@@ -100,3 +103,11 @@
   }
 }
 /* #CFF4FC */
+@media (max-width: 450px) {
+  .card {
+    height: 7rem;
+  }
+  .card-title {
+    text-align: center;
+  }
+}

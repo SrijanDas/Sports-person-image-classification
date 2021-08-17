@@ -1,5 +1,8 @@
 Dropzone.autoDiscover = false;
 
+// change this varibale to "production" when deploying
+const env = "production";
+
 const sportsPersons = [
   "cristiano_ronaldo",
   "conor_mcgregor",
@@ -26,7 +29,7 @@ function loadCards() {
       <div id=${person} class="card shadow" style="max-width: 500px">  
       <div class="card-body">
           <img
-            src="/static/img/${person}.jpg"
+            src="./img/${person}.jpg"
             class="card-img img-fluid"
             alt="..."
           />
@@ -59,7 +62,11 @@ function init() {
   dz.on("complete", function (file) {
     let imageData = file.dataURL;
 
-    var url = window.location.origin + "/classify_image";
+    if (env == "production") {
+      var url = "https://sports-person-classify.herokuapp.com/classify_image";
+    } else {
+      var url = "http://localhost:5000/classify_image";
+    }
 
     $.post(
       url,
