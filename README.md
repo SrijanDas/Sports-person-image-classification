@@ -49,7 +49,8 @@ Start the backend server
   python app.py
 ```
 
-Now as the backend server is running you can open `frontend\index.html`.  
+Now the backend server is running.
+Open `frontend\index.html`.  
 That's it 👍. You are ready to go.
 
 ## Roadmap
@@ -95,8 +96,6 @@ The frontend was built with HTML, CSS, Javascript, Jquery, Bootstrap.
 - Fronted was deployed on **_netlify_**
 
 ## Thank you 😃
-
-## 🔗
 
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://srijan-das.web.app/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/srijan-das-3591791b3)
