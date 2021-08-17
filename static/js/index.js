@@ -1,4 +1,5 @@
 Dropzone.autoDiscover = false;
+
 const sportsPersons = [
   "cristiano_ronaldo",
   "conor_mcgregor",
@@ -58,7 +59,7 @@ function init() {
   dz.on("complete", function (file) {
     let imageData = file.dataURL;
 
-    var url = "http://127.0.0.1:5000/classify_image";
+    var url = window.location.origin + "/classify_image";
 
     $.post(
       url,
