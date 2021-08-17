@@ -174,7 +174,7 @@ function loadCardBg(personDetected, personName, proabilityScore) {
 
     $(`#${personName}`).css({
       background: `linear-gradient(90deg, #20c997 ${bgWidth}%, white 0%)`,
-      border: "2px solid #20c997",
+      border: "3px solid #20c997",
     });
   } else {
     $("#" + personName).css({
