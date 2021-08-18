@@ -49,8 +49,13 @@ Start the backend server
   python app.py
 ```
 
-Now the backend server is running.
-Open `frontend\index.html`.  
+Now the backend server is running. Open `frontend\index.html`.  
+Note: Open `frontend\js\index.js` and change `env` variable to use the local backend server.
+
+```bash
+  const env = "dev";
+```
+
 That's it 👍. You are ready to go.
 
 ## Roadmap
