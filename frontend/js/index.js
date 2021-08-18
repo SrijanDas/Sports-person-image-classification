@@ -88,6 +88,7 @@ function init() {
           $("#divClassTable").hide();
           $("#submitBtn").html("Classify");
           $("#error").show();
+          $("#myModal").modal("hide");
           loadCards();
           dz.removeFile(file);
           return;
