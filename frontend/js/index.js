@@ -136,6 +136,7 @@ function init() {
         dz.removeFile(file);
 
         $("#submitBtn").html("Classify");
+        $("#myModal").modal("hide");
       }
     );
   });
@@ -148,6 +149,7 @@ function init() {
       <span class="visually-hidden">Loading...</span>
     </div>
     `);
+    $("#myModal").modal("show");
     dz.processQueue();
   });
 }
