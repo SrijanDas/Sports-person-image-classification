@@ -72,7 +72,17 @@
   height: 200px;
   object-fit: cover;
 }
-
+#pageLoader {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pageloader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 @media (max-width: 768px) {
   .card {
     height: 4.5rem;

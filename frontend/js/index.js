@@ -13,6 +13,13 @@ const sportsPersons = [
 ];
 
 $(document).ready(function () {
+  $("#content").hide();
+  $("#pageLoader").show();
+  window.setTimeout(() => {
+    $("#content").show();
+    $("#pageLoader").hide();
+  }, 400);
+
   $("#error").hide();
   $("#resultHolder").hide();
   $("#divClassTable").hide();
