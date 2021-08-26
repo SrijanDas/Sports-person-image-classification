@@ -28,32 +28,32 @@ https://sports-person-classify.netlify.app/
 Clone the project
 
 ```bash
-  git clone https://github.com/SrijanDas/Sports-person-image-classification.git
+git clone https://github.com/SrijanDas/Sports-person-image-classification.git
 ```
 
 Go to the server directory
 
 ```bash
-  cd Sports-person-image-classification\server\
+cd Sports-person-image-classification\server\
 ```
 
 Install dependencies
 
 ```bash
-  pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 Start the backend server
 
 ```bash
-  python app.py
+python app.py
 ```
 
 Now the backend server is running. Open `frontend\index.html`.  
 Note: Open `frontend\js\index.js` and change `env` variable to use the local backend server.
 
 ```bash
-  const env = "dev";
+const env = "dev";
 ```
 
 That's it 👍. You are ready to go.
